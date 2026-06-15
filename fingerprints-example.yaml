@@ -1,0 +1,52 @@
+# vm-depot fingerprints example
+#
+# THIS FILE IS DOCUMENTATION, NOT A BUNDLED RULE LIBRARY.
+#
+# The discover blueprint ships zero rules per DEC-000011. The customer
+# (typically via Professional Services) maintains their own
+# fingerprints.yaml in a version-controlled URL they own. This file
+# demonstrates the schema and exists so the engine can be exercised end-
+# to-end during demos and tests.
+#
+# Governing spec:
+#   vm-depot/specs/discover/blueprint/fingerprints-yaml-spec.md
+
+schema_version: 0
+
+fingerprints:
+
+    - id: wordpress
+      name: "WordPress"
+      description: >-
+          Apache + MariaDB serving a docroot that contains wp-config.php.
+          This is the signature the demo WP VM at 69.167.149.99 produces.
+      matches:
+          - { type: file_glob,             glob: "/var/www/*/wp-config.php" }
+          - { type: systemd_active_pattern, pattern: "^apache2\\.service$" }
+          - { type: systemd_active_pattern, pattern: "^mariadb\\.service$" }
+      confidence: high
+
+    - id: mariadb_server
+      name: "MariaDB Server"
+      description: "deb_packages contains mariadb-server, mariadb is listening on 3306."
+      matches:
+          - { type: deb_package,    name: "mariadb-server" }
+          - { type: systemd_active, name: "mariadb.service" }
+          - { type: listening_port, port: 3306 }
+      confidence: high
+
+    - id: generic_apache_site
+      name: "Apache-served web app (specific app not identified)"
+      description: >-
+          A fallback rule: matches when Apache is up on port 80 but no
+          more specific rule fired. Useful for surfacing 'something
+          is web-served here, but we do not yet have a rule for it.'
+      matches:
+          - { type: systemd_active_pattern, pattern: "^(apache2|httpd)\\.service$" }
+          - { type: listening_port, port: 80 }
+      confidence: medium
+      notes: >-
+          Be aware that this rule will ALSO match for WordPress, etc.
+          The manifest will show both 'wordpress' and 'generic_apache_site'
+          if the WP-specific rule above also matches. Operator review
+          collapses overlapping entries.
