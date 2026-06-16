@@ -1,7 +1,7 @@
 schema_version: 0
 vm:
   moid: vm-73774
-  scan_id: vm-73774-2026-06-16T18:24:04Z
+  scan_id: vm-73774-2026-06-16T19:18:42Z
   hostname: debian.wr01.com
 inventory:
   os_info:
@@ -6993,6 +6993,10 @@ inventory:
     id: sys-module-fuse.device
     sub_state: plugged
   - active_state: active
+    description: Session 486 of User debian
+    id: session-486.scope
+    sub_state: running
+  - active_state: active
     description: RealtimeKit Scheduling Policy Service
     id: rtkit-daemon.service
     sub_state: running
@@ -7383,10 +7387,6 @@ inventory:
   - active_state: active
     description: Disk Cache Cleaning Daemon for Apache HTTP Server
     id: apache-htcacheclean.service
-    sub_state: running
-  - active_state: active
-    description: Session 479 of User debian
-    id: session-479.scope
     sub_state: running
   - active_state: active
     description: Virtual_disk 5
@@ -8741,4 +8741,15 @@ applications:
   - evidence_kind: custom_cron
     value: *id072
     reason: no rule matched
-envelope: {}
+  rules_summary:
+    rule_source: https://raw.githubusercontent.com/mr-kelley/osquery-demos/refs/heads/main/fingerprints-example.yaml
+    rules_total: 5
+    rules_matched: 3
+    rules_unmatched: 2
+    matched_ids:
+    - wordpress
+    - mariadb_server
+    - generic_apache_site
+    unmatched_ids:
+    - wordpress_multisite
+    - postgresql_warehouse
