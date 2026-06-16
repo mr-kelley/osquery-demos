@@ -8,6 +8,16 @@
 # demonstrates the schema and exists so the engine can be exercised end-
 # to-end during demos and tests.
 #
+# It contains five rules, three intended to match against the WP demo
+# VM at 69.167.149.99 (wordpress, mariadb_server, generic_apache_site)
+# and two intended NOT to match (wordpress_multisite, postgresql_warehouse).
+# The non-matching rules let the engine demonstrate its AND semantics:
+# wordpress_multisite shares three of four signals with the wordpress
+# rule but adds one the VM does not have (partial-overlap negative);
+# postgresql_warehouse shares zero signals with the VM (no-overlap
+# negative). Both stay absent from applications.identified; the engine
+# never speculates on partial matches.
+#
 # Governing spec:
 #   vm-depot/specs/discover/blueprint/fingerprints-yaml-spec.md
 
@@ -25,6 +35,28 @@ fingerprints:
           - { type: systemd_active_pattern, pattern: "^apache2\\.service$" }
           - { type: systemd_active_pattern, pattern: "^mariadb\\.service$" }
       confidence: high
+
+    - id: wordpress_multisite
+      name: "WordPress Multisite"
+      description: >-
+          WordPress in multisite mode: the three base WordPress signals
+          PLUS wp-cli installed under /opt for network-admin tooling.
+          Included to demonstrate the partial-overlap negative case:
+          three of four signals match (same evidence as the wordpress
+          rule above), but /opt/wp-cli/wp is not present on the WP demo
+          VM, so this rule does NOT fire. The engine requires ALL
+          matchers to pass before claiming identification.
+      matches:
+          - { type: file_glob,             glob: "/var/www/*/wp-config.php" }
+          - { type: systemd_active_pattern, pattern: "^apache2\\.service$" }
+          - { type: systemd_active_pattern, pattern: "^mariadb\\.service$" }
+          - { type: file_exists,           path: "/opt/wp-cli/wp" }
+      confidence: medium
+      notes: >-
+          Strict superset of the wordpress rule. On the WP demo VM the
+          first three matchers succeed but the file_exists matcher fails,
+          so this rule does not appear in applications.identified. This
+          is the engine correctly avoiding a false positive.
 
     - id: mariadb_server
       name: "MariaDB Server"
@@ -50,3 +82,21 @@ fingerprints:
           The manifest will show both 'wordpress' and 'generic_apache_site'
           if the WP-specific rule above also matches. Operator review
           collapses overlapping entries.
+
+    - id: postgresql_warehouse
+      name: "PostgreSQL Data Warehouse"
+      description: >-
+          Standalone PostgreSQL server: the postgresql deb package,
+          the postgresql systemd unit, and the standard 5432 port.
+          Included to demonstrate the no-overlap negative case: none
+          of these signals exist on the WP demo VM, so the rule does
+          not fire. This is the cleanest possible no-match outcome.
+      matches:
+          - { type: deb_package,    name: "postgresql" }
+          - { type: systemd_active, name: "postgresql.service" }
+          - { type: listening_port, port: 5432 }
+      confidence: high
+      notes: >-
+          Zero signal overlap with the WP demo VM. Contrast with
+          wordpress_multisite, which has near-total overlap but still
+          fails to match.
