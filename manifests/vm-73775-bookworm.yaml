@@ -1,0 +1,782 @@
+schema_version: 0
+vm:
+  moid: vm-73775-bookworm
+  scan_id: vm-73775-bookworm-2026-06-17T19:25:00Z
+  hostname: host.wr01.com
+  source_manifest: vm-73775
+  source_codename: bullseye
+  translation_note: Focused subset translated from the vm-73775 bullseye capture. Targets Debian 12 (bookworm). Stand-in for
+    the customer-app-team manifest curation step in their datacenter workflow.
+inventory:
+  os_info:
+  - build: ''
+    codename: bookworm
+    name: Debian GNU/Linux
+    patch: '0'
+    platform: debian
+    version: 12 (bookworm)
+  packages_deb:
+  - arch: amd64
+    name: apache2
+    source: ''
+    version: 2.4.67-1~deb12u2
+  - arch: amd64
+    name: apache2-bin
+    source: ''
+    version: 2.4.67-1~deb12u2
+  - arch: all
+    name: apache2-data
+    source: ''
+    version: 2.4.67-1~deb12u2
+  - arch: amd64
+    name: apache2-utils
+    source: ''
+    version: 2.4.67-1~deb12u2
+  - arch: amd64
+    name: mariadb-server
+    source: ''
+    version: 1:10.11.14-0+deb12u2
+  - arch: amd64
+    name: mariadb-server-core
+    source: ''
+    version: 1:10.11.14-0+deb12u2
+  - arch: amd64
+    name: mariadb-client
+    source: ''
+    version: 1:10.11.14-0+deb12u2
+  - arch: amd64
+    name: mariadb-client-core
+    source: ''
+    version: 1:10.11.14-0+deb12u2
+  - arch: all
+    name: mariadb-common
+    source: ''
+    version: 1:10.11.14-0+deb12u2
+  - arch: amd64
+    name: libmariadb3
+    source: ''
+    version: 1:10.11.14-0+deb12u2
+  - arch: all
+    name: mysql-common
+    source: ''
+    version: 5.8+1.1.0
+  - arch: amd64
+    name: galera-4
+    source: ''
+    version: 26.4.23-0+deb12u1
+  - arch: all
+    name: php
+    source: ''
+    version: 2:8.2+93
+  - arch: all
+    name: php-common
+    source: ''
+    version: 2:93
+  - arch: all
+    name: php-cli
+    source: ''
+    version: 2:8.2+93
+  - arch: all
+    name: php-fpm
+    source: ''
+    version: 2:8.2+93
+  - arch: all
+    name: php-mysql
+    source: ''
+    version: 2:8.2+93
+  - arch: all
+    name: php-curl
+    source: ''
+    version: 2:8.2+93
+  - arch: all
+    name: php-gd
+    source: ''
+    version: 2:8.2+93
+  - arch: all
+    name: php-mbstring
+    source: ''
+    version: 2:8.2+93
+  - arch: all
+    name: php-xml
+    source: ''
+    version: 2:8.2+93
+  - arch: all
+    name: php-zip
+    source: ''
+    version: 2:8.2+93
+  - arch: all
+    name: php-intl
+    source: ''
+    version: 2:8.2+93
+  - arch: all
+    name: libapache2-mod-php
+    source: ''
+    version: 2:8.2+93
+  - arch: amd64
+    name: php8.2-common
+    source: ''
+    version: 8.2.31-1~deb12u1
+  - arch: amd64
+    name: php8.2-cli
+    source: ''
+    version: 8.2.31-1~deb12u1
+  - arch: amd64
+    name: php8.2-fpm
+    source: ''
+    version: 8.2.31-1~deb12u1
+  - arch: amd64
+    name: php8.2-mysql
+    source: ''
+    version: 8.2.31-1~deb12u1
+  - arch: amd64
+    name: php8.2-curl
+    source: ''
+    version: 8.2.31-1~deb12u1
+  - arch: amd64
+    name: php8.2-gd
+    source: ''
+    version: 8.2.31-1~deb12u1
+  - arch: amd64
+    name: php8.2-mbstring
+    source: ''
+    version: 8.2.31-1~deb12u1
+  - arch: amd64
+    name: php8.2-xml
+    source: ''
+    version: 8.2.31-1~deb12u1
+  - arch: amd64
+    name: php8.2-zip
+    source: ''
+    version: 8.2.31-1~deb12u1
+  - arch: amd64
+    name: php8.2-intl
+    source: ''
+    version: 8.2.31-1~deb12u1
+  - arch: amd64
+    name: php8.2-opcache
+    source: ''
+    version: 8.2.31-1~deb12u1
+  - arch: amd64
+    name: php8.2-readline
+    source: ''
+    version: 8.2.31-1~deb12u1
+  - arch: amd64
+    name: libapache2-mod-php8.2
+    source: ''
+    version: 8.2.31-1~deb12u1
+  - arch: amd64
+    name: libgd3
+    source: ''
+    version: 2.3.3-9
+  - arch: amd64
+    name: libpng16-16
+    source: ''
+    version: 1.6.39-2+deb12u5
+  - arch: amd64
+    name: libjpeg62-turbo
+    source: ''
+    version: 1:2.1.5-2
+  - arch: amd64
+    name: cron
+    source: ''
+    version: 3.0pl1-162
+  - arch: amd64
+    name: logrotate
+    source: ''
+    version: 3.21.0-1
+  - arch: amd64
+    name: curl
+    source: ''
+    version: 7.88.1-10+deb12u14
+  - arch: amd64
+    name: unzip
+    source: ''
+    version: 6.0-28
+  - arch: amd64
+    name: gawk
+    source: ''
+    version: 1:5.2.1-2
+evidence:
+  listening_ports:
+  - &id002
+    port: 3306
+    protocol: tcp
+    process_name: mariadbd
+    pid: 14543
+  - &id003
+    port: 80
+    protocol: tcp
+    process_name: apache2
+    pid: 19996
+  custom_systemd_units:
+  - &id004
+    name: accounts-daemon.service
+    load_state: loaded
+    active_state: active
+    sub_state: running
+  - &id005
+    name: apache-htcacheclean.service
+    load_state: loaded
+    active_state: active
+    sub_state: running
+  - name: apache2.service
+    load_state: loaded
+    active_state: active
+    sub_state: running
+  - &id006
+    name: avahi-daemon.service
+    load_state: loaded
+    active_state: active
+    sub_state: running
+  - &id007
+    name: colord.service
+    load_state: loaded
+    active_state: active
+    sub_state: running
+  - &id008
+    name: console-setup.service
+    load_state: loaded
+    active_state: active
+    sub_state: exited
+  - &id009
+    name: cups-browsed.service
+    load_state: loaded
+    active_state: active
+    sub_state: running
+  - &id010
+    name: cups.service
+    load_state: loaded
+    active_state: active
+    sub_state: running
+  - &id011
+    name: fwupd.service
+    load_state: loaded
+    active_state: active
+    sub_state: running
+  - &id012
+    name: gdm.service
+    load_state: loaded
+    active_state: active
+    sub_state: running
+  - &id013
+    name: ifupdown-pre.service
+    load_state: loaded
+    active_state: active
+    sub_state: exited
+  - &id014
+    name: keyboard-setup.service
+    load_state: loaded
+    active_state: active
+    sub_state: exited
+  - &id015
+    name: kmod-static-nodes.service
+    load_state: loaded
+    active_state: active
+    sub_state: exited
+  - &id001
+    name: mariadb.service
+    load_state: loaded
+    active_state: active
+    sub_state: running
+  - &id016
+    name: ModemManager.service
+    load_state: loaded
+    active_state: active
+    sub_state: running
+  - &id017
+    name: networking.service
+    load_state: loaded
+    active_state: active
+    sub_state: exited
+  - &id018
+    name: NetworkManager.service
+    load_state: loaded
+    active_state: active
+    sub_state: running
+  - &id019
+    name: open-vm-tools.service
+    load_state: loaded
+    active_state: active
+    sub_state: running
+  - &id020
+    name: packagekit.service
+    load_state: loaded
+    active_state: active
+    sub_state: running
+  - &id021
+    name: plymouth-quit-wait.service
+    load_state: loaded
+    active_state: active
+    sub_state: exited
+  - &id022
+    name: plymouth-read-write.service
+    load_state: loaded
+    active_state: active
+    sub_state: exited
+  - &id023
+    name: plymouth-start.service
+    load_state: loaded
+    active_state: active
+    sub_state: exited
+  - &id024
+    name: rtkit-daemon.service
+    load_state: loaded
+    active_state: active
+    sub_state: running
+  - &id025
+    name: switcheroo-control.service
+    load_state: loaded
+    active_state: active
+    sub_state: running
+  - &id026
+    name: udisks2.service
+    load_state: loaded
+    active_state: active
+    sub_state: running
+  - &id027
+    name: upower.service
+    load_state: loaded
+    active_state: active
+    sub_state: running
+  - &id028
+    name: user-runtime-dir@1000.service
+    load_state: loaded
+    active_state: active
+    sub_state: exited
+  - &id029
+    name: vgauth.service
+    load_state: loaded
+    active_state: active
+    sub_state: running
+  - &id030
+    name: wpa_supplicant.service
+    load_state: loaded
+    active_state: active
+    sub_state: running
+  custom_installs:
+  - &id031
+    root: /usr/local
+    name: games
+    type: dir
+    size_bytes: 4096
+  - &id032
+    root: /usr/local
+    name: sbin
+    type: dir
+    size_bytes: 4096
+  - &id033
+    root: /usr/local
+    name: src
+    type: dir
+    size_bytes: 4096
+  - &id034
+    root: /usr/local
+    name: etc
+    type: dir
+    size_bytes: 4096
+  - &id035
+    root: /usr/local
+    name: include
+    type: dir
+    size_bytes: 4096
+  - &id036
+    root: /usr/local
+    name: man
+    type: symlink
+    size_bytes: 9
+  - &id037
+    root: /usr/local
+    name: share
+    type: dir
+    size_bytes: 61476
+  - &id038
+    root: /usr/local
+    name: lib
+    type: dir
+    size_bytes: 12288
+  - &id039
+    root: /usr/local
+    name: bin
+    type: dir
+    size_bytes: 7146873
+  docroots:
+  - &id040
+    site: wordpress.conf
+    document_root: /var/www/html/wordpress
+    top_level:
+    - index.php
+    - license.txt
+    - readme.html
+    - wp-activate.php
+    - wp-admin
+    - wp-blog-header.php
+    - wp-comments-post.php
+    - wp-config.php
+    - wp-config-sample.php
+    - wp-content
+    - wp-cron.php
+    - wp-includes
+    - wp-links-opml.php
+    - wp-load.php
+    - wp-login.php
+    - wp-mail.php
+    - wp-settings.php
+    - wp-signup.php
+    - wp-trackback.php
+    - xmlrpc.php
+  service_users:
+  - &id041
+    username: rtkit
+    uid: 107
+    gid: 115
+    home: /proc
+    shell: /usr/sbin/nologin
+  - &id042
+    username: avahi
+    uid: 110
+    gid: 116
+    home: /run/avahi-daemon
+    shell: /usr/sbin/nologin
+  - &id043
+    username: speech-dispatcher
+    uid: 111
+    gid: 29
+    home: /run/speech-dispatcher
+    shell: /bin/false
+  - &id044
+    username: pulse
+    uid: 112
+    gid: 118
+    home: /run/pulse
+    shell: /usr/sbin/nologin
+  - &id045
+    username: saned
+    uid: 113
+    gid: 121
+    home: /var/lib/saned
+    shell: /usr/sbin/nologin
+  - &id046
+    username: colord
+    uid: 114
+    gid: 122
+    home: /var/lib/colord
+    shell: /usr/sbin/nologin
+  - &id047
+    username: geoclue
+    uid: 115
+    gid: 123
+    home: /var/lib/geoclue
+    shell: /usr/sbin/nologin
+  - &id048
+    username: Debian-gdm
+    uid: 116
+    gid: 124
+    home: /var/lib/gdm3
+    shell: /bin/false
+  - &id049
+    username: debian
+    uid: 1000
+    gid: 1000
+    home: /home/debian
+    shell: /bin/bash
+  custom_cron:
+  - &id050
+    source: /etc/cron.d/anacron
+    schedule: SHELL=/bin/sh
+    command: ''
+  - &id051
+    source: /etc/cron.d/e2scrub_all
+    schedule: 30 3 * * 0
+    command: test -e /run/systemd/system || SERVICE_MODE=1 /usr/lib/x86_64-linux-gnu/e2fsprogs/e2scrub_all_cron
+  - &id052
+    source: /etc/cron.d/php
+    schedule: 09,39 * * * *
+    command: '[ -x /usr/lib/php/sessionclean ] && if [ ! -d /run/systemd/system ]; then /usr/lib/php/sessionclean; fi'
+  - &id053
+    source: /etc/cron.daily/0anacron
+    schedule: (daily-style)
+    command: /etc/cron.daily/0anacron
+  - &id054
+    source: /etc/cron.daily/apache2
+    schedule: (daily-style)
+    command: /etc/cron.daily/apache2
+  - &id055
+    source: /etc/cron.daily/apt-compat
+    schedule: (daily-style)
+    command: /etc/cron.daily/apt-compat
+  - &id056
+    source: /etc/cron.daily/cracklib-runtime
+    schedule: (daily-style)
+    command: /etc/cron.daily/cracklib-runtime
+  - &id057
+    source: /etc/cron.daily/dpkg
+    schedule: (daily-style)
+    command: /etc/cron.daily/dpkg
+  - &id058
+    source: /etc/cron.daily/logrotate
+    schedule: (daily-style)
+    command: /etc/cron.daily/logrotate
+  - &id059
+    source: /etc/cron.daily/man-db
+    schedule: (daily-style)
+    command: /etc/cron.daily/man-db
+  - &id060
+    source: /etc/cron.weekly/0anacron
+    schedule: (daily-style)
+    command: /etc/cron.weekly/0anacron
+  - &id061
+    source: /etc/cron.weekly/man-db
+    schedule: (daily-style)
+    command: /etc/cron.weekly/man-db
+  - &id062
+    source: /etc/cron.monthly/0anacron
+    schedule: (daily-style)
+    command: /etc/cron.monthly/0anacron
+applications:
+  identified:
+  - id: wordpress
+    name: WordPress
+    confidence: high
+    matched_by:
+    - rule_id: wordpress
+      rule_source: https://raw.githubusercontent.com/mr-kelley/osquery-demos/refs/heads/main/fingerprints-example.yaml
+      schema_version: 0
+    evidence_refs:
+    - type: file_glob
+      glob: /var/www/*/wp-config.php
+      matched_paths:
+      - /var/www/html/wordpress/wp-config.php
+    - type: systemd_active_pattern
+      pattern: ^apache2\.service$
+      matched_units:
+      - apache2.service
+    - type: systemd_active_pattern
+      pattern: ^mariadb\.service$
+      matched_units:
+      - mariadb.service
+  - id: mariadb_server
+    name: MariaDB Server
+    confidence: high
+    matched_by:
+    - rule_id: mariadb_server
+      rule_source: https://raw.githubusercontent.com/mr-kelley/osquery-demos/refs/heads/main/fingerprints-example.yaml
+      schema_version: 0
+    evidence_refs:
+    - type: deb_package
+      name: mariadb-server
+      matched_package:
+        arch: all
+        name: mariadb-server
+        source: mariadb-10.5
+        version: 1:10.5.29-0+deb11u1
+    - type: systemd_active
+      name: mariadb.service
+      matched_unit: *id001
+    - type: listening_port
+      port: 3306
+      matched_port: *id002
+  - id: generic_apache_site
+    name: Apache-served web app (specific app not identified)
+    confidence: medium
+    matched_by:
+    - rule_id: generic_apache_site
+      rule_source: https://raw.githubusercontent.com/mr-kelley/osquery-demos/refs/heads/main/fingerprints-example.yaml
+      schema_version: 0
+    evidence_refs:
+    - type: systemd_active_pattern
+      pattern: ^(apache2|httpd)\.service$
+      matched_units:
+      - apache2.service
+    - type: listening_port
+      port: 80
+      matched_port: *id003
+  unidentified:
+  - evidence_kind: systemd_active
+    value: *id004
+    reason: no rule matched
+  - evidence_kind: systemd_active
+    value: *id005
+    reason: no rule matched
+  - evidence_kind: systemd_active
+    value: *id006
+    reason: no rule matched
+  - evidence_kind: systemd_active
+    value: *id007
+    reason: no rule matched
+  - evidence_kind: systemd_active
+    value: *id008
+    reason: no rule matched
+  - evidence_kind: systemd_active
+    value: *id009
+    reason: no rule matched
+  - evidence_kind: systemd_active
+    value: *id010
+    reason: no rule matched
+  - evidence_kind: systemd_active
+    value: *id011
+    reason: no rule matched
+  - evidence_kind: systemd_active
+    value: *id012
+    reason: no rule matched
+  - evidence_kind: systemd_active
+    value: *id013
+    reason: no rule matched
+  - evidence_kind: systemd_active
+    value: *id014
+    reason: no rule matched
+  - evidence_kind: systemd_active
+    value: *id015
+    reason: no rule matched
+  - evidence_kind: systemd_active
+    value: *id016
+    reason: no rule matched
+  - evidence_kind: systemd_active
+    value: *id017
+    reason: no rule matched
+  - evidence_kind: systemd_active
+    value: *id018
+    reason: no rule matched
+  - evidence_kind: systemd_active
+    value: *id019
+    reason: no rule matched
+  - evidence_kind: systemd_active
+    value: *id020
+    reason: no rule matched
+  - evidence_kind: systemd_active
+    value: *id021
+    reason: no rule matched
+  - evidence_kind: systemd_active
+    value: *id022
+    reason: no rule matched
+  - evidence_kind: systemd_active
+    value: *id023
+    reason: no rule matched
+  - evidence_kind: systemd_active
+    value: *id024
+    reason: no rule matched
+  - evidence_kind: systemd_active
+    value: *id025
+    reason: no rule matched
+  - evidence_kind: systemd_active
+    value: *id026
+    reason: no rule matched
+  - evidence_kind: systemd_active
+    value: *id027
+    reason: no rule matched
+  - evidence_kind: systemd_active
+    value: *id028
+    reason: no rule matched
+  - evidence_kind: systemd_active
+    value: *id029
+    reason: no rule matched
+  - evidence_kind: systemd_active
+    value: *id030
+    reason: no rule matched
+  - evidence_kind: custom_install
+    value: *id031
+    reason: no rule matched
+  - evidence_kind: custom_install
+    value: *id032
+    reason: no rule matched
+  - evidence_kind: custom_install
+    value: *id033
+    reason: no rule matched
+  - evidence_kind: custom_install
+    value: *id034
+    reason: no rule matched
+  - evidence_kind: custom_install
+    value: *id035
+    reason: no rule matched
+  - evidence_kind: custom_install
+    value: *id036
+    reason: no rule matched
+  - evidence_kind: custom_install
+    value: *id037
+    reason: no rule matched
+  - evidence_kind: custom_install
+    value: *id038
+    reason: no rule matched
+  - evidence_kind: custom_install
+    value: *id039
+    reason: no rule matched
+  - evidence_kind: docroot
+    value: *id040
+    reason: no rule matched
+  - evidence_kind: service_user
+    value: *id041
+    reason: no rule matched
+  - evidence_kind: service_user
+    value: *id042
+    reason: no rule matched
+  - evidence_kind: service_user
+    value: *id043
+    reason: no rule matched
+  - evidence_kind: service_user
+    value: *id044
+    reason: no rule matched
+  - evidence_kind: service_user
+    value: *id045
+    reason: no rule matched
+  - evidence_kind: service_user
+    value: *id046
+    reason: no rule matched
+  - evidence_kind: service_user
+    value: *id047
+    reason: no rule matched
+  - evidence_kind: service_user
+    value: *id048
+    reason: no rule matched
+  - evidence_kind: service_user
+    value: *id049
+    reason: no rule matched
+  - evidence_kind: custom_cron
+    value: *id050
+    reason: no rule matched
+  - evidence_kind: custom_cron
+    value: *id051
+    reason: no rule matched
+  - evidence_kind: custom_cron
+    value: *id052
+    reason: no rule matched
+  - evidence_kind: custom_cron
+    value: *id053
+    reason: no rule matched
+  - evidence_kind: custom_cron
+    value: *id054
+    reason: no rule matched
+  - evidence_kind: custom_cron
+    value: *id055
+    reason: no rule matched
+  - evidence_kind: custom_cron
+    value: *id056
+    reason: no rule matched
+  - evidence_kind: custom_cron
+    value: *id057
+    reason: no rule matched
+  - evidence_kind: custom_cron
+    value: *id058
+    reason: no rule matched
+  - evidence_kind: custom_cron
+    value: *id059
+    reason: no rule matched
+  - evidence_kind: custom_cron
+    value: *id060
+    reason: no rule matched
+  - evidence_kind: custom_cron
+    value: *id061
+    reason: no rule matched
+  - evidence_kind: custom_cron
+    value: *id062
+    reason: no rule matched
+  rules_summary:
+    rule_source: https://raw.githubusercontent.com/mr-kelley/osquery-demos/refs/heads/main/fingerprints-example.yaml
+    rules_total: 5
+    rules_matched: 3
+    rules_unmatched: 2
+    matched_ids:
+    - wordpress
+    - mariadb_server
+    - generic_apache_site
+    unmatched_ids:
+    - wordpress_multisite
+    - postgresql_warehouse
