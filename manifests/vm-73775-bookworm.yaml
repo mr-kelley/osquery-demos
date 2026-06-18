@@ -780,7 +780,7 @@ applications:
     unmatched_ids:
     - wordpress_multisite
     - postgresql_warehouse
-  post_install:
-    playbook:
-      bundled_path: playbooks/wordpress.yml
-      extra_vars: {}
+post_install:
+  playbook:
+    bundled_path: playbooks/wordpress.yml
+    extra_vars: {}
