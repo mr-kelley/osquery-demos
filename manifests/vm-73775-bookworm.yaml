@@ -196,6 +196,10 @@ inventory:
     name: gawk
     source: ''
     version: 1:5.2.1-2
+  - arch: amd64
+    name: wordpress
+    source: ''
+    version: 6.1.9+dfsg1-0+deb12u1
 evidence:
   listening_ports:
   - &id002
