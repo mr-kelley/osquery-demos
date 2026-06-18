@@ -1,0 +1,140 @@
+# wordpress.yml -- reference app-install playbook for the vm-depot
+# recompose-deploy demo (v0.2.0).
+#
+# Wires up the Debian-packaged WordPress that recompose-deploy's package
+# install phase put on the new VM. The Debian wordpress package drops
+# files at /usr/share/wordpress/ and expects the operator to wire Apache
+# + MariaDB + /etc/wordpress/config-<host>.php manually -- this playbook
+# is that wiring.
+#
+# Runs against the inventory host "target" (built by
+# app_install_preflight.py from openstack_provisioner.server_ip +
+# target_ssh_user + the in-guest SSH key). Manager-side execution via
+# the cloudify-ansible-plugin (DEC-000015).
+#
+# Public hosting target (per DEC-000016 + sprint 02 design):
+#   https://raw.githubusercontent.com/mr-kelley/osquery-demos/main/playbooks/wordpress.yml
+#
+# Authoring is the user's job; the in-tree copy is a draft for review
+# and operator-side iteration. Once published, the bookworm manifest
+# carries the raw URL above in post_install.playbook.url.
+#
+# Optional extra_vars (manifest's post_install.playbook.extra_vars):
+#   wp_db_name      -- defaults to "wordpress"
+#   wp_db_user      -- defaults to "wordpress"
+#   wp_db_password  -- defaults to "demo-only-changeme"
+#
+# Idempotent: re-runnable against the same VM; the DB CREATE IF NOT
+# EXISTS + a2enconf-when-not-already-enabled + copy with mode/owner
+# checks let ansible reach the same end state every time.
+#
+# ASCII-only per DEC-000004 (the playbook will be published from this
+# tree as-is).
+---
+- name: WordPress recompose-deploy app install
+  hosts: target
+  gather_facts: true
+  become: true
+  vars:
+    wp_db_name: "{{ wp_db_name | default('wordpress') }}"
+    wp_db_user: "{{ wp_db_user | default('wordpress') }}"
+    wp_db_password: "{{ wp_db_password | default('demo-only-changeme') }}"
+
+  tasks:
+    - name: Sanity -- wordpress package present (apache snippet exists)
+      ansible.builtin.stat:
+        path: /usr/share/doc/wordpress/examples/apache.conf
+      register: wp_apache_example
+      failed_when: not wp_apache_example.stat.exists
+
+    - name: Copy Debian WP apache snippet into conf-available
+      ansible.builtin.copy:
+        src: /usr/share/doc/wordpress/examples/apache.conf
+        dest: /etc/apache2/conf-available/wordpress.conf
+        remote_src: true
+        owner: root
+        group: root
+        mode: '0644'
+      notify: Reload apache2
+
+    - name: Enable the wordpress apache config
+      ansible.builtin.command: a2enconf wordpress
+      register: a2enconf_result
+      changed_when: "'Enabling conf wordpress' in a2enconf_result.stdout"
+      failed_when:
+        - a2enconf_result.rc != 0
+        - "'already enabled' not in a2enconf_result.stdout"
+      notify: Reload apache2
+
+    - name: Create WordPress database (idempotent at the SQL layer)
+      ansible.builtin.command:
+        argv:
+          - mysql
+          - -u
+          - root
+          - -e
+          - "CREATE DATABASE IF NOT EXISTS `{{ wp_db_name }}`;"
+      changed_when: false
+
+    - name: Create WordPress database user (idempotent at the SQL layer)
+      ansible.builtin.command:
+        argv:
+          - mysql
+          - -u
+          - root
+          - -e
+          - >-
+            CREATE USER IF NOT EXISTS '{{ wp_db_user }}'@'localhost'
+            IDENTIFIED BY '{{ wp_db_password }}';
+      changed_when: false
+      no_log: true
+
+    - name: Grant WordPress user access to its database
+      ansible.builtin.command:
+        argv:
+          - mysql
+          - -u
+          - root
+          - -e
+          - >-
+            GRANT ALL ON `{{ wp_db_name }}`.*
+            TO '{{ wp_db_user }}'@'localhost';
+            FLUSH PRIVILEGES;
+      changed_when: false
+
+    - name: Write WordPress config-default.php (DB credentials)
+      ansible.builtin.copy:
+        dest: /etc/wordpress/config-default.php
+        content: |
+          <?php
+          define('DB_NAME', '{{ wp_db_name }}');
+          define('DB_USER', '{{ wp_db_user }}');
+          define('DB_PASSWORD', '{{ wp_db_password }}');
+          define('DB_HOST', 'localhost');
+          define('DB_COLLATE', 'utf8_general_ci');
+          define('WP_CONTENT_DIR', '/var/lib/wordpress/wp-content');
+        owner: root
+        group: www-data
+        mode: '0640'
+      no_log: true
+      notify: Reload apache2
+
+    - name: Ensure /etc/wordpress is mode 0755 (Apache must traverse it)
+      ansible.builtin.file:
+        path: /etc/wordpress
+        state: directory
+        owner: root
+        group: root
+        mode: '0755'
+
+    - name: Ensure apache2 is enabled and running
+      ansible.builtin.service:
+        name: apache2
+        enabled: true
+        state: started
+
+  handlers:
+    - name: Reload apache2
+      ansible.builtin.service:
+        name: apache2
+        state: reloaded
