@@ -780,3 +780,7 @@ applications:
     unmatched_ids:
     - wordpress_multisite
     - postgresql_warehouse
+  post_install:
+    playbook:
+      url: https://raw.githubusercontent.com/mr-kelley/osquery-demos/main/playbooks/wordpress.yaml
+      extra_vars: {}
